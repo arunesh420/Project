@@ -36,21 +36,21 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
     mysqli_stmt_close($stmt);
 
 
-    
+
     //check for email
-    
+
     if (empty(trim($_POST["email"]))) {
         $email_err = "email cannot be blank";
     } else {
         $email = trim($_POST['email']);
     }
-    
+
     if (empty(trim($_POST["contact"]))) {
         $contact_err = "contact cannot be blank";
     } else {
         $contact = trim($_POST['contact']);
     }
-    
+
 
 
 // Check for password
@@ -77,7 +77,7 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
 
             // Set these parameters
             $param_name = $name;
-            
+
             $param_email = $email;
             $param_contact = $contact;
             $param_password = password_hash($password, PASSWORD_DEFAULT);
@@ -93,7 +93,7 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
     }
     mysqli_close($conn);
 
-    
+
 }
 
 
@@ -106,19 +106,19 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
 <html lang="en">
 <head>
     <title>Register</title>
-    <link href="header.php">
 </head>
 <body>
 <h1>Php Login System</h1>
 <a href="register.php">Register</a>
 <a href="login.php">Login</a>
 
+<div class="container mt-4">
     <hr>
-    <form action="login.php" method="post">
+    <form action="register.php" method="post">
         <label for="name">name:</label>
         <input type="text" name="name" id="name" placeholder="name">
 
-        
+
 
         <label for="email">email:</label>
         <input type="email" name="email" id="email" placeholder="email">
@@ -132,8 +132,8 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
         <input type="password"  name="confirm_password" id="confirm_password"
                placeholder="Confirm Password">
 
-        <button type="submit" class="btn btn-dark" >Sign in</button>
-
+        <button type="submit" >Sign in</button>
     </form>
+</div>
 </body>
 </html>
