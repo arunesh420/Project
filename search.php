@@ -9,7 +9,7 @@ if(isset($_POST["search_keyword"]) && isset($_POST["search_field"])){
     }
 }
 ?>
-
+<?php include "head.php"?>
 <html>
 <head><title>Search</title><link href="header.php"></head>
 <body>
@@ -24,7 +24,7 @@ if(isset($_POST["search_keyword"]) && isset($_POST["search_field"])){
 
 </form>
 <a href="retrieve.php"><button>Clear</button></a>
-<table border="1">
+<table class="table table-bordered" border="1">
     <tr>
         <th>id</th>
         <th>Name</th>

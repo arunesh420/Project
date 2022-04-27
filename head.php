@@ -10,6 +10,4 @@
     <script src="assets/js/bootstrap.bundle.min.js"></script>
 
     <title>Big damdar project </title>
-
-
 </head>

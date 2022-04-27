@@ -101,39 +101,95 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
 
 ?>
 
-
+<?php include "head.php"?>
 <!doctype html>
 <html lang="en">
 <head>
     <title>Register</title>
+    <link href="assets/css/register.css" rel="stylesheet" />
 </head>
-<body>
-<h1>Php Login System</h1>
-<a href="register.php">Register</a>
-<a href="login.php">Login</a>
+<!--<body>-->
+<!--<h1>Php Login System</h1>-->
+<!--<a href="register.php">Register</a>-->
+<!--<a href="login.php">Login</a>-->
+<!---->
+<!--<div class="container mt-4">-->
+<!--    <hr>-->
+<!--    <form action="register.php" method="post">-->
+<!--        <label for="name">name:</label>-->
+<!--        <input type="text" name="name" id="name" placeholder="name">-->
+<!---->
+<!---->
+<!---->
+<!--        <label for="email">email:</label>-->
+<!--        <input type="email" name="email" id="email" placeholder="email">-->
+<!---->
+<!--        <label for="contact">contact:</label>-->
+<!--        <input type="text" name="contact" id="contact" placeholder="contact">-->
+<!---->
+<!--        <label for="password">Password:</label>-->
+<!--        <input type="password"  name="password" id="password" placeholder="Password">-->
+<!--        <label for="confirm_password">Confirm Password:</label>-->
+<!--        <input type="password"  name="confirm_password" id="confirm_password"-->
+<!--               placeholder="Confirm Password">-->
+<!---->
+<!--        <button type="submit" >Sign in</button>-->
+<!--    </form>-->
+<!--</div>-->
+<!--</body>-->
 
-<div class="container mt-4">
-    <hr>
-    <form action="register.php" method="post">
-        <label for="name">name:</label>
-        <input type="text" name="name" id="name" placeholder="name">
+<section class="vh-100 bg-image"
+         style="background-image: url('https://mdbcdn.b-cdn.net/img/Photos/new-templates/search-box/img4.webp');">
+    <div class="mask d-flex align-items-center h-100 gradient-custom-3">
+        <div class="container h-100">
+            <div class="row d-flex justify-content-center align-items-center h-100">
+                <div class="col-12 col-md-9 col-lg-7 col-xl-6">
+                    <div class="card" style="border-radius: 15px;">
+                        <div class="card-body p-5">
+                            <h2 class="text-uppercase text-center mb-5">Create an account</h2>
 
+                            <form action="" method="post" >
 
+                                <div class="form-outline mb-2">
+                                    <input type="text" id="form3Example1cg" name="name" class="form-control form-control-lg" />
+                                    <label class="form-label" for="form3Example1cg">Your Name</label>
+                                </div>
 
-        <label for="email">email:</label>
-        <input type="email" name="email" id="email" placeholder="email">
+                                <div class="form-outline mb-2">
+                                    <input type="email" id="form3Example3cg" name="email" class="form-control form-control-lg" />
+                                    <label class="form-label" for="form3Example3cg">Your Email</label>
+                                </div>
+                                <div class="form-outline mb-2">
+                                    <input type="number" id="form3Example3cg" name="contact" class="form-control form-control-lg" />
+                                    <label class="form-label" for="form3Example3cg">Contact number</label>
+                                </div>
+                                <div class="form-outline mb-2">
+                                    <input type="password" id="form3Example4cg" name="password" class="form-control form-control-lg" />
+                                    <label class="form-label" for="form3Example4cg">Password</label>
+                                </div>
 
-        <label for="contact">contact:</label>
-        <input type="text" name="contact" id="contact" placeholder="contact">
+                                <div class="form-outline mb-2">
+                                    <input type="password" id="form3Example4cdg" name="confirm_password" class="form-control form-control-lg" />
+                                    <label class="form-label" for="form3Example4cdg">Confirm Password</label>
+                                </div>
+                                </div>
 
-        <label for="password">Password:</label>
-        <input type="password"  name="password" id="password" placeholder="Password">
-        <label for="confirm_password">Confirm Password:</label>
-        <input type="password"  name="confirm_password" id="confirm_password"
-               placeholder="Confirm Password">
+                                <div class="d-flex justify-content-center">
+                                    <button type="submit"
+                                            class="btn btn-success btn-block btn-lg text-body">Register</button>
+                                </div>
 
-        <button type="submit" >Sign in</button>
-    </form>
-</div>
-</body>
+                                <p class="text-center text-muted mt-5 mb-2">Already have an account? <a href="login.php"
+                                                                                                        class="fw-bold text-body"><u>Login here</u></a></p>
+
+                            </form>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
 </html>

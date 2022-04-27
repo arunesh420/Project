@@ -3,7 +3,7 @@ require_once "config.php";
 $sql = "SELECT * FROM contacts";
 $result=mysqli_query($conn,$sql)
 ?>
-<?php //include "../header.php"?>
+<?php include "head.php"?>
     <html>
     <head><title>Retrieve</title><link href="header.php"></head>
     <body>
@@ -18,7 +18,7 @@ $result=mysqli_query($conn,$sql)
         </select>
         <input type="submit" value="Search">
     </form>
-    <table border="1">
+    <table class="table table-bordered" border="1">
         <tr>
             <th>id</th>
             <th>Name</th>
@@ -41,4 +41,3 @@ $result=mysqli_query($conn,$sql)
     </table>
     </body>
     </html>
-<?php //include "../footer.php"?>
