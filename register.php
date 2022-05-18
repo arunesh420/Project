@@ -45,14 +45,6 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
         $email = trim($_POST['email']);
     }
 
-    if (empty(trim($_POST["contact"]))) {
-        $contact_err = "contact cannot be blank";
-    } else {
-        $contact = trim($_POST['contact']);
-    }
-
-
-
 // Check for password
     if (empty(trim($_POST['password']))) {
         $password_err = "Password cannot be blank";
@@ -151,26 +143,27 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
                             <form action="" method="post" >
 
                                 <div class="form-outline mb-2">
-                                    <input type="text" id="form3Example1cg" name="name" class="form-control form-control-lg" />
                                     <label class="form-label" for="form3Example1cg">Your Name</label>
+                                    <input type="text" id="form3Example1cg" name="name" class="form-control form-control-lg" />
+
                                 </div>
 
                                 <div class="form-outline mb-2">
-                                    <input type="email" id="form3Example3cg" name="email" class="form-control form-control-lg" />
                                     <label class="form-label" for="form3Example3cg">Your Email</label>
-                                </div>
-                                <div class="form-outline mb-2">
-                                    <input type="number" id="form3Example3cg" name="contact" class="form-control form-control-lg" />
-                                    <label class="form-label" for="form3Example3cg">Contact number</label>
-                                </div>
-                                <div class="form-outline mb-2">
-                                    <input type="password" id="form3Example4cg" name="password" class="form-control form-control-lg" />
-                                    <label class="form-label" for="form3Example4cg">Password</label>
+                                    <input type="email" id="form3Example3cg" name="email" class="form-control form-control-lg" />
+
                                 </div>
 
                                 <div class="form-outline mb-2">
-                                    <input type="password" id="form3Example4cdg" name="confirm_password" class="form-control form-control-lg" />
+                                    <label class="form-label" for="form3Example4cg">Password</label>
+                                    <input type="password" id="form3Example4cg" name="password" class="form-control form-control-lg" />
+
+                                </div>
+
+                                <div class="form-outline mb-2">
                                     <label class="form-label" for="form3Example4cdg">Confirm Password</label>
+                                    <input type="password" id="form3Example4cdg" name="confirm_password" class="form-control form-control-lg" />
+
                                 </div>
                                 </div>
 
