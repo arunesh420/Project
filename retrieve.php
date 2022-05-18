@@ -28,7 +28,7 @@ $result=mysqli_query($conn,$sql)
 
 <?php foreach ($result as $row){ ?>
     <div class="card" style="width: 18rem;">
-        <img src="upload/<?php echo $row['image']?> " width="70" height="70" class="card-img-top" alt="...">
+        <img src="upload/<?php echo $row['image']?> " style = "object-fit: cover; object-position: 100% 0;" class="card-img-top" alt="...">
         <div class="card-body">
             <h5 class="card-title"><?php  echo $row['name']?> </h5>
         </div>

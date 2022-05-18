@@ -3,8 +3,8 @@
 require_once "config.php";
 
 //Define variables and initialize with empty values
-$first_name = $last_name = $email = "";
-$first_name_err = $last_name_err = $email_err = "";
+//$first_name = $last_name = $email = "";
+//$first_name_err = $last_name_err = $email_err = "";
 // Processing form data when form is submitted
 if (isset($_POST["id"]) && !empty($_POST["id"])) {
 // Get hidden input value
@@ -13,65 +13,29 @@ if (isset($_POST["id"]) && !empty($_POST["id"])) {
     $filename = $_FILES['image']['name'];
     $folder = "upload/" . $filename;
 
-
-//Validate first name
-    $input_first_name = trim($_POST["first_name"]);
-    if (empty($input_first_name)) {
-        $first_name_err = "Please enter a first name";
-        echo "Please enter a first name.";
-    } elseif (!filter_var($input_first_name, FILTER_VALIDATE_REGEXP, array("options" => array("regexp" => "/^[a-zA-Z\s]+$/")))) {
-        $first_name_err = "Please enter a valid first name";
-        echo "Please enter a valid first name";
-    } else {
-        $first_name = $input_first_name;
-    }
-
-//Validate last name
-    $input_last_name = trim($_POST["last_name"]);
-    if (empty($input_last_name)) {
-        $last_name_err = "Please enter a last name";
-        echo "Please enter a last name.";
-    } elseif (!filter_var($input_last_name, FILTER_VALIDATE_REGEXP, array("options" => array("regexp" => "/^[a-zA-Z\s]+$/")))) {
-        $last_name_err = "Please enter a valid last name";
-        echo "Please enter a valid last name";
-
-    } else {
-        $last_name = $input_last_name;
-    }
-//Validation of email
-    $input_email = trim($_POST["email"]);
-    if (empty($input_email)) {
-        $email_err = "Please enter a email";
-        echo "Please enter a email";
-    } else {
-        $email = $input_email;
-    }
-
-// Check input errors before inserting in database
-    if (empty($first_name_err) && empty($last_name_err) && empty($email_err)) {
         // Prepare an update statement
         if ($filename == "") {
-            $sql = "UPDATE persons SET first_name=?, last_name=?, email=? WHERE id=?";
+            $sql = "UPDATE contacts SET name=?, address=?, email=?, contact= ? WHERE id=?";
             if ($stmt = mysqli_prepare($conn, $sql)) {
                 // Bind variables to the prepared statement as parameters
-                mysqli_stmt_bind_param($stmt, "sssi", $param_first_name, $param_last_name, $param_email, $param_id);
+                mysqli_stmt_bind_param($stmt, "ssssi", $param_name, $param_address, $param_email, $param_contact,  $param_id);
 
                 // Set parameters
-                $param_first_name = $first_name;
-                $param_last_name = $last_name;
-                $param_email = $email;
+                $param_name = $_POST['name'];
+                $param_address = $_POST['address'];
+                $param_email = $_POST['email'] ;
                 $param_id = $id;
             }
         } else {
-            $sql = "UPDATE  persons SET first_name=?, last_name=?, email=?, image=? WHERE id=?";
+            $sql = "UPDATE contacts SET name=?, address=?, email=?, contact= ? , image=? WHERE id=?";
             if ($stmt = mysqli_prepare($conn, $sql)) {
 
                 // Bind variables to the prepared statement as parameters
-                mysqli_stmt_bind_param($stmt, "ssssi", $param_first_name, $param_last_name, $param_email, $filename, $param_id);
+                mysqli_stmt_bind_param($stmt, "sssssi", $param_name, $param_address, $param_email, $param_contact, $filename,  $param_id);
                 // Set parameters
-                $param_first_name = $first_name;
-                $param_last_name = $last_name;
-                $param_email = $email;
+                $param_name = $_POST['name'];
+                $param_address = $_POST['address'];
+                $param_email = $_POST['email'] ;
                 $filename = $_FILES['image']['name'];
                 $param_id = $id;
             }
@@ -85,12 +49,12 @@ if (isset($_POST["id"]) && !empty($_POST["id"])) {
         if (mysqli_stmt_execute($stmt)) {
 
             // Records updated successfully. Redirect to landing page
-            header("location: retrieve_to.php");
+            header("location: retrieve.php");
             exit();
         } else {
             echo "Oops! Something went wrong. Please try again later.";
         }
-    }
+
 
 
 // Close statement
@@ -104,7 +68,7 @@ if (isset($_POST["id"]) && !empty($_POST["id"])) {
         // Get URL parameter
         $id = trim($_GET["id"]);
         // Prepare a select statement
-        $sql = "SELECT * FROM persons WHERE id = ?";
+        $sql = "SELECT * FROM contacts WHERE id = ?";
         if ($stmt = mysqli_prepare($conn, $sql)) {
             // Bind variables to the prepared statement as parameters
             mysqli_stmt_bind_param($stmt, "i", $param_id);
@@ -122,9 +86,10 @@ if (isset($_POST["id"]) && !empty($_POST["id"])) {
                     $row = mysqli_fetch_array($result);
 
                     // Retrieve individual field value
-                    $first_name = $row["first_name"];
-                    $last_name = $row["last_name"];
+                    $name = $row["name"];
+                    $address = $row["address"];
                     $email = $row["email"];
+                    $contact = $row['contact'];
                     $image = $row["image"];
 
                 } else {
@@ -156,9 +121,10 @@ if (isset($_POST["id"]) && !empty($_POST["id"])) {
 <div class="container">
     <h1>Edit page</h1>
     <form method="post" action="" enctype="multipart/form-data">
-        <input type="text" class="form-control" name="first_name" value="<?php echo $first_name; ?>"<br><br>
-        <input type="text" class="form-control" name="last_name" value="<?php echo $last_name; ?>"<br><br>
+        <input type="text" class="form-control" name="first_name" value="<?php echo $name; ?>"<br><br>
+        <input type="text" class="form-control" name="last_name" value="<?php echo $address; ?>"<br><br>
         <input type="email" class="form-control" name="email" value="<?php echo $email; ?>" <br><br>
+        <img src="upload/<?php echo $image; ?>" width="140" height="140" alt="">
         <input type="file" class="form-control" name="image"><br><br><?php echo $image; ?><br>
         <input type="hidden" name="id" value="<?php echo $id; ?>"/>
         <input type="submit" class="btn btn-primary" value="Update">
