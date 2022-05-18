@@ -8,18 +8,28 @@ if($conn === false){
     die("ERROR: Could not connect. " . mysqli_connect_error());
 }
 if ($_SERVER['REQUEST_METHOD'] == "POST") {
+
+    $temp_name=$_FILES['image']['tmp_name'];
+    $filename=$_FILES['image']['name'];
+    $folder = "upload/".$filename;
+    if (move_uploaded_file($temp_name, $folder))  {
+        $msg = "Image uploaded successfully";
+    }else{
+        $msg = "Failed to upload image";
+    }
+
 // Prepare an insert statement
-$sql = "INSERT INTO contacts (name, address, email, contact) VALUES (?, ? , ?, ?)";
+$sql = "INSERT INTO contacts (name, address, email, contact, image) VALUES (?, ? , ?, ?,?)";
 $stmt = mysqli_prepare($conn, $sql);
 if ($stmt) {
-    mysqli_stmt_bind_param($stmt, "ssss", $param_name, $param_address, $param_email, $param_contact);
+    mysqli_stmt_bind_param($stmt, "sssss", $param_name, $param_address, $param_email, $param_contact, $filename);
 
     // Set these parameters
     $param_name = $_POST['name'];
     $param_address = $_POST['address'];
     $param_email = $_POST['email'];
     $param_contact = $_POST['contact'];
-   
+   $filename = $_FILES['image']['name'];
     
 
     // Try to execute the query
@@ -44,7 +54,7 @@ if ($stmt) {
     <title>Prepared form</title><link href="header.php">
 </head>
 <body>
-<form method="post" action="prepared_form.php">
+<form method="post" action="prepared_form.php" enctype="multipart/form-data">
 <label for="name">name:</label>
         <input type="text" name="name" id="name" placeholder="name">
 
@@ -56,6 +66,7 @@ if ($stmt) {
 
         <label for="contact">contact:</label>
         <input type="text" name="contact" id="contact" placeholder="contact">
+    <input type="file" name="image" id="image" value="image">
 
 
         
