@@ -13,6 +13,8 @@ if (isset($_POST["id"]) && !empty($_POST["id"])) {
     $filename = $_FILES['image']['name'];
     $folder = "upload/" . $filename;
 
+
+
         // Prepare an update statement
         if ($filename == "") {
             $sql = "UPDATE contacts SET name=?, address=?, email=?, contact= ? WHERE id=?";
@@ -22,8 +24,11 @@ if (isset($_POST["id"]) && !empty($_POST["id"])) {
 
                 // Set parameters
                 $param_name = $_POST['name'];
+                echo $_POST['name'];
+                echo $_POST['address'];
                 $param_address = $_POST['address'];
                 $param_email = $_POST['email'] ;
+                $param_contact = $_POST['contact'] ;
                 $param_id = $id;
             }
         } else {
@@ -36,8 +41,11 @@ if (isset($_POST["id"]) && !empty($_POST["id"])) {
                 $param_name = $_POST['name'];
                 $param_address = $_POST['address'];
                 $param_email = $_POST['email'] ;
+                $param_contact = $_POST['contact'] ;
                 $filename = $_FILES['image']['name'];
                 $param_id = $id;
+                echo $_POST['name'];
+                echo $_POST['address'];
             }
         }
         if (move_uploaded_file($temp_name, $folder)) {
@@ -121,9 +129,10 @@ if (isset($_POST["id"]) && !empty($_POST["id"])) {
 <div class="container">
     <h1>Edit page</h1>
     <form method="post" action="" enctype="multipart/form-data">
-        <input type="text" class="form-control" name="first_name" value="<?php echo $name; ?>"<br><br>
-        <input type="text" class="form-control" name="last_name" value="<?php echo $address; ?>"<br><br>
-        <input type="email" class="form-control" name="email" value="<?php echo $email; ?>" <br><br>
+      Name  <input type="text" class="form-control" name="name" value="<?php echo $name; ?>"<br><br>
+       Contact  <input type="text" class="form-control" name="contact" value="<?php echo $contact; ?>"<br><br>
+  Address      <input type="text" class="form-control" name="address" value="<?php echo $address; ?>"<br><br>
+        email <input type="email" class="form-control" name="email" value="<?php echo $email; ?>" <br><br>
         <img src="upload/<?php echo $image; ?>" width="140" height="140" alt="">
         <input type="file" class="form-control" name="image"><br><br><?php echo $image; ?><br>
         <input type="hidden" name="id" value="<?php echo $id; ?>"/>
